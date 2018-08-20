@@ -1,19 +1,22 @@
+const cat = require('./Cat');
+
+
 module.exports = (sequelize, DataTypes) => {
-    const cat = sequelize.define('cat', {
-        ownerId: DataTypes.UUID,
+    const owner = sequelize.define('owner', {
         firstName: {
             type: DataTypes.STRING
         },
         lastName: {
             type: DataTypes.STRING
         }
-        
+    
     }, {
         timestamps: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at'
     })
 
+    
 
-    return cat;
+    return owner
 }

@@ -7,6 +7,8 @@ const SetUpMiddleware = require('./middlewares/setUpMiddleware');
 
 const HomeController = require('./controllers/HomeController');
 const CatsController = require('./controllers/CatsController');
+const OwnerController = require('./controllers/OwnerController');
+
 
 module.exports = class App {
     constructor(port) {
@@ -28,12 +30,13 @@ module.exports = class App {
     mountController() {
         this.app.use('/', HomeController);
         this.app.use('/cats', CatsController);
+        this.app.use('/owners', OwnerController);
     }
 
     async start() {
-        this.mountMiddleware();
+        await this.mountMiddleware();
         await this.mountDatabase();
-        this.mountController();
+        await this.mountController();
         this.http.listen(this.port, () => {
             console.log(`Server start at ${this.port}`);
         })

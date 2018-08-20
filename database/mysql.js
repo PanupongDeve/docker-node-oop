@@ -6,8 +6,7 @@ class Mysql {
     constructor() {
         this.Sequelize = Sequelize;
         this.sequelize = this.setupDatabase();
-        this.model = this.mountModel(this.sequelize, this.Sequelize);
-        
+        this.model = this.mountModel(this.sequelize, this.Sequelize);     
     }
 
     setupDatabase() {
@@ -44,10 +43,35 @@ class Mysql {
           });
     }
 
-    mountModel(sequelize, DataTypes) {
+    async mountModel(sequelize, DataTypes) {
         const model = {};
-        model.cats = require('../model/Cat')(sequelize, DataTypes);
-        return model;
+        model.owner = require('../model/Owner')(sequelize, DataTypes);
+        model.cat = require('../model/Cat')(sequelize, DataTypes);
+
+        await this.mountSync(model);
+        await this.mountRelation(model);
+    
+        return model
+        
+    }
+
+    async mountSync(model) {
+        /**
+         * ทำการสร้าง database
+         * model.owner.sync({force: true}); --> สร้างดาต้าเบาอันใหม่โดนลบข้อมูลออกหมด
+         */
+      
+        await model.owner.sync();
+        await model.cat.sync();
+        
+    }
+
+    async mountRelation(model) {
+        /**
+         * กำหนด relation
+         * 
+         */
+        model.owner.hasMany(model.cat);
     }
 
     
