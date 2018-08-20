@@ -45,6 +45,7 @@ class Mysql {
 
     async mountModel(sequelize, DataTypes) {
         const model = {};
+        model.user = require('../model/User')(sequelize, DataTypes);
         model.owner = require('../model/Owner')(sequelize, DataTypes);
         model.cat = require('../model/Cat')(sequelize, DataTypes);
 
@@ -58,11 +59,12 @@ class Mysql {
     async mountSync(model) {
         /**
          * ทำการสร้าง database
-         * model.owner.sync({force: true}); --> สร้างดาต้าเบาอันใหม่โดนลบข้อมูลออกหมด
+         * model.owner.sync({force: true}); --> สร้างดาต้าเบสอันใหม่โดยลบข้อมูลออกหมด
          */
-      
-        await model.owner.sync();
-        await model.cat.sync();
+        
+        await model.user.sync({force: true});
+        await model.owner.sync({force: true});
+        await model.cat.sync({force: true});
         
     }
 

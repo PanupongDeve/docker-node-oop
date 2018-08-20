@@ -10,6 +10,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
@@ -18,7 +19,7 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "faker": "^4.1.0",
-    "jsonwebtoken": "^8.2.2",
+    "jsonwebtoken": "^8.3.0",
     "moment-timezone": "^0.5.17",
     "morgan": "^1.9.0",
     "mysql2": "^1.5.3",

@@ -5,6 +5,7 @@ const mysql = require('./database/mysql');
 
 const SetUpMiddleware = require('./middlewares/setUpMiddleware');
 
+const AuthController = require('./controllers/AuthController');
 const HomeController = require('./controllers/HomeController');
 const CatsController = require('./controllers/CatsController');
 const OwnerController = require('./controllers/OwnerController');
@@ -29,8 +30,9 @@ module.exports = class App {
 
     mountController() {
         this.app.use('/', HomeController);
-        this.app.use('/cats', CatsController);
-        this.app.use('/owners', OwnerController);
+        this.app.use('/auth', AuthController);
+        this.app.use('/api/cats', CatsController);
+        this.app.use('/api/owners', OwnerController);
     }
 
     async start() {
