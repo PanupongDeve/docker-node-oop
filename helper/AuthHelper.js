@@ -10,18 +10,27 @@ class AuthHelper {
         return bcrypt.hashSync(password, this.saltRounds);
     }
 
-    verifyPassword() {
-
+    verifyPassword(password, passwordHash) {
+        if(!bcrypt.compareSync(password, passwordHash)) {
+            throw "password incorrect";
+        }
     }
 
     generateToken(data) {
-        let token = jwt.sign(data, 'IloveGod');
-        token = `Bearer ${token}`;
+        let token = jwt.sign(data, 'IloveGod',  { expiresIn: '7d' });
         return token;
     }
 
-    getDataFromToken() {
-
+    verifyToken(token) {
+        if(!token) {
+            throw "invlid token"; 
+        }
+        const decoded = jwt.verify(token, 'IloveGod');
+        if(!decoded) {
+            throw "token incorrect"
+        } else {
+            return decoded
+        }
     }
 }
 

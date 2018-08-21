@@ -1,25 +1,25 @@
 class ApiResponse {
 
     success(data) {
-        return (res, meta=null) => {
-            res.status(200);
+        return (res, meta=null, status=200) => {
+            res.status(status);
             res.setHeader('Content-Type', 'application/json');
             res.json({
                 data,
-                status: 200,
+                status,
                 meta
             })    
         }
     }
 
     error(error) {
-        return (res) => {
-            res.status(400);
+        return (res, status=400) => {
+            res.status(status);
             res.setHeader('Content-Type', 'application/json');
 
             res.json({
                 error,
-                status: 400,
+                status
             }) 
         }
     }

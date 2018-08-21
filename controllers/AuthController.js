@@ -6,17 +6,44 @@ const modelPromise = require('../database/mysql').model;
 const UserDTO = require('../dto/UserDTO');
 const enumTypes = require('../enum');
 
+
 class AuthController {
     constructor() {
         this.router = router;
-        this.router.get('/login', this.login);
+        this.router.post('/login', this.login);
         this.router.post('/register', this.register);
-        this.router.get('/me', this.getProfileFormToken);
+        
     }
 
     async login(req, res) {
+        const username = req.body.username;
+        const password = req.body.password;
+        const model = await Promise.resolve(modelPromise);
 
-        const model = await Promise.resolve(modelPromise);   
+        try {
+            let user = await model.user.findOne({
+                where: {
+                    username
+                }
+            });
+
+            if(!user) {
+                throw "username invalid in database";
+            } else {
+                AuthHelper.verifyPassword(password, user.passwordHash);
+                user = new UserDTO(user).toObject();
+                const userResponse = {
+                    user,
+                    token: AuthHelper.generateToken(user)
+                }
+                ApiResponse.success(userResponse)(res);
+            }
+            
+        } catch (error) {
+            console.log(error);
+            ApiResponse.error(error)(res);
+        }
+
         
     }
 
@@ -66,13 +93,7 @@ class AuthController {
 
         
     }
-
-    async getProfileFormToken(req, res) {
-        const model = await Promise.resolve(modelPromise);   
-        
-    }
-
-    
+  
 }
 
 module.exports = new AuthController().router;

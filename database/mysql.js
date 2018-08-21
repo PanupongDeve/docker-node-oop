@@ -62,9 +62,9 @@ class Mysql {
          * model.owner.sync({force: true}); --> สร้างดาต้าเบสอันใหม่โดยลบข้อมูลออกหมด
          */
         
-        await model.user.sync({force: true});
-        await model.owner.sync({force: true});
-        await model.cat.sync({force: true});
+        await model.user.sync();
+        await model.owner.sync();
+        await model.cat.sync();
         
     }
 
