@@ -4,7 +4,8 @@ services:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
     ports:
       - 3306:3306
     volumes:
@@ -23,7 +24,7 @@ services:
       context: .
       dockerfile: web.Dockerfile
     ports:
-      - 3000:3000
+      - ${PORT}:${PORT}
     links:
       - mysql
   server:
