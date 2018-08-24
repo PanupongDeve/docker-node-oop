@@ -32,9 +32,9 @@ services:
       DB_HOST: ${DB_HOST}
       DB_HOST_DOCKER: ${DB_HOST_DOCKER}
       DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       PORT: ${PORT}
-      
   server:
     build:
       context: .
