@@ -27,6 +27,14 @@ services:
       - ${PORT}:${PORT}
     links:
       - mysql
+    environment:
+      DOCKER: ${DOCKER}
+      DB_HOST: ${DB_HOST}
+      DB_HOST_DOCKER: ${DB_HOST_DOCKER}
+      DB_NAME: ${DB_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      PORT: ${PORT}
+      
   server:
     build:
       context: .
@@ -36,5 +44,9 @@ services:
       - 443:443
     links:
       - web
+    environment:
+      PORT: ${PORT}
+      DOMAIN1: ${DOMAIN1}
+      DOMAIN2: ${DOMAIN2}
     volumes:
       - $HOME/.caddy:/root/.caddy

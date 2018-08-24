@@ -1,6 +1,6 @@
-*.self-ucounseling.com, self-ucounseling.com {
-	proxy / web:3000
-        tls {
+{$DOMAIN1}, {$DOMAIN2} {
+	proxy / web:{$PORT}
+    tls {
 		max_certs 10
 	}
 
