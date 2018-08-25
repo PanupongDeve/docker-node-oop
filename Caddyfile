@@ -1,9 +1,13 @@
 {$DOMAIN1}, {$DOMAIN2} {
-	proxy / web:{$PORT}
-    tls {
-		max_certs 10
+	
+	proxy / web:{$PORT}  {
+		header_upstream Host {host}
+		header_upstream X-Real-IP {remote}
+		header_upstream X-Forwarded-Proto {scheme}
 	}
-
+	gzip
+	log /var/log/caddy.log
+ 	
 }
 
 
