@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const ApiResponse = require('../helper/ApiResponse');
-const enumTypes = require('../enum');
-const Middlewares = require('../middlewares');
-const UserDTO = require('../dto/UserDTO');
+const ApiResponse = require('../../helper/ApiResponse');
+const enumTypes = require('../../enum');
+const Middlewares = require('../../middlewares');
+const UserDTO = require('../../dto/UserDTO');
 
 class HomeController {
     constructor() {

@@ -5,10 +5,7 @@ const mysql = require('./database/mysql');
 
 const SetUpMiddleware = require('./middlewares/setUpMiddleware');
 
-const AuthController = require('./controllers/AuthController');
-const HomeController = require('./controllers/HomeController');
-const CatsController = require('./controllers/CatsController');
-const OwnerController = require('./controllers/OwnerController');
+const MysqlController = require('./controllers/MysqlController');
 
 
 module.exports = class App {
@@ -20,7 +17,7 @@ module.exports = class App {
     }
 
     async mountDatabase() {
-        await mysql.testDB();
+        await mysql.connectMysql();
     }
 
     mountMiddleware() {
@@ -29,10 +26,8 @@ module.exports = class App {
     }
 
     mountController() {
-        this.app.use('/', HomeController);
-        this.app.use('/auth', AuthController);
-        this.app.use('/api/cats', CatsController);
-        this.app.use('/api/owners', OwnerController);
+        MysqlController.inCludeApp(this.app);
+        MysqlController.mount();
     }
 
     async start() {
