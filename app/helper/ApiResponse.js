@@ -1,6 +1,9 @@
 class ApiResponse {
 
-    success(data) {
+    success(data=false) {
+        if(!data) {
+            data= "success"
+        }
         return (res, meta=null, status=200) => {
             res.status(status);
             res.setHeader('Content-Type', 'application/json');
