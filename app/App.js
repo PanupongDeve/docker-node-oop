@@ -1,8 +1,8 @@
 const express = require('express');
 const http = require('http');
-const mysql = require('./database/mysql');
 const SetUpMiddleware = require('./middlewares/setUpMiddleware');
-const MysqlController = require('./controllers/MysqlController');
+const mongodb = require('./database/mongoDB');
+const MongoDbController = require('./controllers/MongoDbController');
 
 
 module.exports = class App {
@@ -14,7 +14,7 @@ module.exports = class App {
     }
 
     async mountDatabase() {
-        await mysql.mount();
+        await mongodb.mount();
     }
 
     mountMiddleware() {
@@ -23,8 +23,8 @@ module.exports = class App {
     }
 
     mountController() {
-        MysqlController.inCludeApp(this.app);
-        MysqlController.mount();
+        MongoDbController.inCludeApp(this.app);
+        MongoDbController.mount();
     }
 
     async start() {
