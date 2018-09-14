@@ -14,6 +14,7 @@ class MysqlController {
     }
 
     mount() {
+        console.log('MYSQL CONTROLLER MOUNT ---> STATUS: SUCCESS');
         this.app.use('/', HomeController);
         this.app.use('/auth', AuthController);
         this.app.use('/api/cats', CatsController);

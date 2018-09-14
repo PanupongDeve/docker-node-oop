@@ -1,10 +1,7 @@
 const express = require('express');
 const http = require('http');
-
 const mysql = require('./database/mysql');
-
 const SetUpMiddleware = require('./middlewares/setUpMiddleware');
-
 const MysqlController = require('./controllers/MysqlController');
 
 
@@ -17,7 +14,7 @@ module.exports = class App {
     }
 
     async mountDatabase() {
-        await mysql.connectMysql();
+        await mysql.mount();
     }
 
     mountMiddleware() {

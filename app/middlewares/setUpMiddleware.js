@@ -35,7 +35,7 @@ class SetupMiddleware {
     }
 
     mount() {
-        console.log('MiddlewareMount');
+        console.log('MIDDLEWARE MOUNT ---> STATUS: SUCCESS');
         this.middleware();
     }
 }
