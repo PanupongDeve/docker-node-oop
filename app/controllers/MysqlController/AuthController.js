@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const ApiResponse = require('../../helper/ApiResponse');
 const AuthHelper = require('../../helper/AuthHelper');
-const modelPromise = require('../../database/mysql').model;
+const modelPromise = require('../../database/mysqlDB').model;
 const UserDTO = require('../../dto/UserDTO');
 const enumTypes = require('../../enum');
 
